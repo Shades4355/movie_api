@@ -5,7 +5,7 @@ import MovieTile from "./MovieTile"
 export const App = (props) => {
   const [movies, setMovies] = useState(null)
 
-  //fetch movie data from backend
+  // fetch movie data from backend
   useEffect(() => {
     fetch('/api/v1/movies',
       {credentials:'same-origin'})
@@ -25,10 +25,12 @@ export const App = (props) => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   },[])
 
+  // display if fetch request finished
   if (movies) {
     let movieTile = movies.map(movie => {
       return(
         <MovieTile
+          key={movie.id}
           name={movie.name}
           upvotes={movie.upvotes}
           downvotes={movie.downvotes}
@@ -36,6 +38,7 @@ export const App = (props) => {
       )
     })
 
+    // the page's actual contents
     return (
       <div className='grid-container'>
         <div className='grid-x grid-margin-x'>
