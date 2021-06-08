@@ -5,13 +5,31 @@ import MovieTile from "./MovieTile"
 export const App = (props) => {
   const [movies, setMovies] = useState(null)
 
-  // TODO: fetch movie data from backend
+  //fetch movie data from backend
+  useEffect(() => {
+    fetch('/api/v1/movies',
+      {credentials:'same-origin'})
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.statuse} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      setMovies(body)
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
+  },[])
 
   if (movies) {
-    movieTile = movies.map(movie => {
+    let movieTile = movies.map(movie => {
       return(
         <MovieTile
-          name={movie.title}
+          name={movie.name}
           upvotes={movie.upvotes}
           downvotes={movie.downvotes}
         />
