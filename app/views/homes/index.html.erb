@@ -1,3 +1,12 @@
+<%# If user isn't logged in, prompt login %>
+<% if not current_user %>
+  <div>
+    Please Log In
+  </div>
+
+  <!-- If user is logged in, show page normally -->
+<% else %>
 <div id='app'>
   <h3>Loading . . .</h3>
 </div>
+<% end %>
