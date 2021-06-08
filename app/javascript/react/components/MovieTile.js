@@ -8,15 +8,16 @@ export const MovieTile = (props) => {
   }
 
   const reveal = () => {
+    // TODO: make this reveal the description
     console.log(props.name, "clicked")
   }
 
   return(
-    <div className='grid-x small-12'>
-      <div className='small-4 cursor-pointer'
+    <ul className='grid-x small-12'>
+      <h3 className='small-4 cursor-pointer'
            onClick={reveal}>
         {props.name}
-      </div>
+      </h3>
       <div className='small-1'>
         {props.upvotes}
       </div>
@@ -37,9 +38,10 @@ export const MovieTile = (props) => {
       </div>
       <div className='small-2'>
       </div>
-      <div >
+      <div small-12>
+      {props.desc}
       </div>
-    </div>
+    </ul>
   )
 }
 
