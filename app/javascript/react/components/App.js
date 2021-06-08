@@ -56,18 +56,21 @@ export const App = (props) => {
           Thumbs Down
           </div>
 
-          <div className='small-12'>
             {movieTile}
-          </div>
 
         </div>
       </div>
     )
-  } else {
+  } else { // display if fetch request fails
     return (
-      <h3>
-        Loading . . .
-      </h3>
+      <div>
+        <h3>
+          Loading...
+        </h3>
+        <div>
+          If this message persists for more than a few seconds, please refresh.
+        </div>
+      </div>
     )
   }
 }
