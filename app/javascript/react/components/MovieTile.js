@@ -16,11 +16,15 @@ export const MovieTile = (props) => {
     details =  ""
   }
 
-  const incrementUpVotes = () => { // TODO: make this increment the correct value
+  const incrementUpVotes = () => {
     let newUpvotes = parseInt(props.upvotes) + 1
 
     const post = {
-      method:'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method:'PATCH',
       credentials:'same-origin',
       body: JSON.stringify({ upvotes: newUpvotes })
     };
