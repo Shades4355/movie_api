@@ -3,8 +3,10 @@ class CreateMovieTable < ActiveRecord::Migration[5.2]
     create_table :movies do |t|
       t.string :name, null: false
       t.string :description, null: false
-      t.integer :upvotes
-      t.integer :downvotes
+      t.string :director, null: false
+      t.integer :release_year, null:false
+      t.integer :upvotes, null:false
+      t.integer :downvotes, null:false
     end
   end
 end

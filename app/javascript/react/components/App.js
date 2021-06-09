@@ -31,7 +31,10 @@ export const App = (props) => {
       return(
         <MovieTile
           key={movie.id}
+          id={movie.id}
           name={movie.name}
+          year={movie.release_year}
+          director={movie.director}
           desc={movie.description}
           upvotes={movie.upvotes}
           downvotes={movie.downvotes}
