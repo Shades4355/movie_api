@@ -32,6 +32,7 @@ export const App = (props) => {
         <MovieTile
           key={movie.id}
           name={movie.name}
+          desc={movie.description}
           upvotes={movie.upvotes}
           downvotes={movie.downvotes}
         />
@@ -46,13 +47,13 @@ export const App = (props) => {
             Welcome to Shades' Movie Search
           </h1>
 
-          <div className='small-4'>
+          <div className='small-4 bold'>
           Movie Title
           </div>
-          <div className='small-4'>
+          <div className='small-4 bold'>
           Thumps Up
           </div>
-          <div className='small-4'>
+          <div className='small-4 bold'>
           Thumbs Down
           </div>
 
