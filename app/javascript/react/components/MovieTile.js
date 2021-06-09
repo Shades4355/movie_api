@@ -16,9 +16,33 @@ export const MovieTile = (props) => {
     details =  ""
   }
 
-  const increment = props => { // TODO: make this increment the correct value
+  const incrementUpVotes = () => { // TODO: make this increment the correct value
+    let newUpvotes = props.upvotes + 1
+
+    const post = {
+      method:'POST',
+      credentials:'same-origin',
+      body: JSON.parse({ upvotes: newUpvotes })
+    };
+
+    fetch('/api/v1/movies/' + props.id, post)
+    console.log('/api/v1/movies/' + props.id)
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.statuse} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+
+  }
+
+  const incrementDownVotes = () => { // TODO: make this increment the correct value
     console.log("click")
-    console.log("Props: ", props)
+    console.log("ID: ", props.id)
+    console.log("up/down: Down")
   }
 
   const reveal = () => {
@@ -39,7 +63,7 @@ export const MovieTile = (props) => {
         {props.upvotes}
       </div>
       <div className='small-1 cursor-pointer'
-           onClick={increment}
+           onClick={incrementUpVotes}
       >
         [x]
       </div>
@@ -49,7 +73,7 @@ export const MovieTile = (props) => {
         {props.downvotes}
       </div>
       <div className='small-1 cursor-pointer'
-           onClick={increment}
+           onClick={incrementDownVotes}
       >
         [x]
       </div>
