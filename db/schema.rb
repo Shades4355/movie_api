@@ -18,8 +18,10 @@ ActiveRecord::Schema.define(version: 2021_06_08_220035) do
   create_table "movies", force: :cascade do |t|
     t.string "name", null: false
     t.string "description", null: false
-    t.integer "upvotes"
-    t.integer "downvotes"
+    t.string "director", null: false
+    t.integer "release_year", null: false
+    t.integer "upvotes", null: false
+    t.integer "downvotes", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -38,8 +38,10 @@ export const MovieTile = (props) => {
       </div>
       <div className='small-2'>
       </div>
-      <div small-12>
-      {props.desc}
+      <div className='small-12'>
+        <p><b>Release Year:</b> {props.year}</p>
+        <p><b>Director:</b> {props.director}</p>
+        <p><b>Description:</b> {props.desc}</p>
       </div>
     </ul>
   )
