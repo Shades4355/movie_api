@@ -1,6 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export const MovieTile = (props) => {
+  const [visibility, setVisibility] = useState(false)
+
+  let details = ""
+
+  if (visibility) {
+    details =
+      <div>
+        <p><b>Release Year:</b> {props.year}</p>
+        <p><b>Director:</b> {props.director}</p>
+        <p><b>Description:</b> {props.desc}</p>
+      </div>
+  } else {
+    details =  ""
+  }
 
   const increment = props => { // TODO: make this increment the correct value
     console.log("click")
@@ -8,8 +22,11 @@ export const MovieTile = (props) => {
   }
 
   const reveal = () => {
-    // TODO: make this reveal the description
-    console.log(props.name, "clicked")
+    if (visibility) {
+      setVisibility(false)
+    } else {
+      setVisibility(true)
+    }
   }
 
   return(
@@ -39,9 +56,7 @@ export const MovieTile = (props) => {
       <div className='small-2'>
       </div>
       <div className='small-12'>
-        <p><b>Release Year:</b> {props.year}</p>
-        <p><b>Director:</b> {props.director}</p>
-        <p><b>Description:</b> {props.desc}</p>
+        {details}
       </div>
     </ul>
   )
