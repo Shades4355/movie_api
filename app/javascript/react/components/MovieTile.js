@@ -17,16 +17,15 @@ export const MovieTile = (props) => {
   }
 
   const incrementUpVotes = () => { // TODO: make this increment the correct value
-    let newUpvotes = props.upvotes + 1
+    let newUpvotes = parseInt(props.upvotes) + 1
 
     const post = {
       method:'POST',
       credentials:'same-origin',
-      body: JSON.parse({ upvotes: newUpvotes })
+      body: JSON.stringify({ upvotes: newUpvotes })
     };
 
     fetch('/api/v1/movies/' + props.id, post)
-    console.log('/api/v1/movies/' + props.id)
     .then(response => {
       if (response.ok) {
         return response
@@ -36,7 +35,7 @@ export const MovieTile = (props) => {
         throw error
       }
     })
-
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
   const incrementDownVotes = () => { // TODO: make this increment the correct value
