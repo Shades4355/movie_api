@@ -38,6 +38,8 @@ export const App = (props) => {
           desc={movie.description}
           upvotes={movie.upvotes}
           downvotes={movie.downvotes}
+          movies={movies}
+          setMovies={setMovies}
         />
       )
     })

@@ -17,7 +17,7 @@ export const MovieTile = (props) => {
   }
 
   const incrementUpVotes = () => {
-    let newUpvotes = parseInt(props.upvotes) + 1
+    let newUpvotes = toString(parseInt(props.upvotes) + 1)
 
     const post = {
       headers: {
@@ -38,6 +38,20 @@ export const MovieTile = (props) => {
         error = new Error(errorMessage)
         throw error
       }
+    })
+    .then(response => {
+      console.log("response:", response)
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.statuse} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      props.setMovies(...props.movies, body)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }

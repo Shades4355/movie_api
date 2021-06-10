@@ -13,11 +13,17 @@ class  Api::V1::MoviesController < ApplicationController
 
   def update
     updated_movie = Movie.find(params[:id])
-    if updated_movie.update(params[:movie])
+
+    if updated_movie.update(movie_params)
       render json: updated_movie
     else
       render json: { errors: updated_movie.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end
   end
 
+  private
+
+  def movie_params
+    params.require(:movie).permit(:upvotes, :downvotes)
+  end
 end
