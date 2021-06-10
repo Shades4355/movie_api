@@ -13,6 +13,7 @@ class  Api::V1::MoviesController < ApplicationController
 
   def update
     updated_movie = Movie.find(params[:id])
+    binding.pry # TODO: remove
 
     if updated_movie.update(movie_params)
       render json: updated_movie

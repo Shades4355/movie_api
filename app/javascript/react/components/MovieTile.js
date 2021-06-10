@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export const MovieTile = (props) => {
   const [visibility, setVisibility] = useState(false)
@@ -17,7 +17,7 @@ export const MovieTile = (props) => {
   }
 
   const incrementUpVotes = () => {
-    let newUpvotes = toString(parseInt(props.upvotes) + 1)
+    let newUpvotes = parseInt(props.upvotes) + 1
 
     const post = {
       headers: {
@@ -29,31 +29,33 @@ export const MovieTile = (props) => {
       body: JSON.stringify({ upvotes: newUpvotes })
     };
 
-    fetch('/api/v1/movies/' + props.id, post)
-    .then(response => {
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.statuse} (${response.statusText})`,
-        error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => {
-      console.log("response:", response)
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.statuse} (${response.statusText})`,
-        error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      props.setMovies(...props.movies, body)
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
+    // useEffect(() => {
+      fetch('/api/v1/movies/' + props.id, post)
+      .then(response => {
+        if (response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.statuse} (${response.statusText})`,
+          error = new Error(errorMessage)
+          throw error
+        }
+      })
+      .then(response => {
+        console.log("response:", response)
+        if (response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.statuse} (${response.statusText})`,
+          error = new Error(errorMessage)
+          throw error
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        props.setMovies(...props.movies, body)
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
+    // },[])
   }
 
   const incrementDownVotes = () => { // TODO: make this increment the correct value
@@ -101,6 +103,6 @@ export const MovieTile = (props) => {
       </div>
     </ul>
   )
-}
 
+}
 export default MovieTile
