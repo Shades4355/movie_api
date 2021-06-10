@@ -29,7 +29,7 @@ export const MovieTile = (props) => {
       body: JSON.stringify({ upvotes: newUpvotes })
     };
 
-    // useEffect(() => {
+    useEffect(() => {
       fetch('/api/v1/movies/' + props.id, post)
       .then(response => {
         if (response.ok) {
@@ -55,7 +55,7 @@ export const MovieTile = (props) => {
         props.setMovies(...props.movies, body)
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
-    // },[])
+    },[])
   }
 
   const incrementDownVotes = () => { // TODO: make this increment the correct value
