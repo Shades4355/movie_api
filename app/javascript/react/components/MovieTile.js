@@ -1,15 +1,111 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 export const MovieTile = (props) => {
+  const [visibility, setVisibility] = useState(false)
 
-  const increment = props => { // TODO: make this increment the correct value
-    console.log("click")
-    console.log("Props: ", props)
+  let details = ""
+
+  if (visibility) {
+    details =
+      <div>
+        <p><b>Release Year:</b> {props.year}</p>
+        <p><b>Director:</b> {props.director}</p>
+        <p><b>Description:</b> {props.desc}</p>
+      </div>
+  } else {
+    details =  ""
+  }
+
+  const incrementUpVotes = () => {
+    let newUpvotes = parseInt(props.upvotes) + 1
+
+    const post = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method:'PATCH',
+      credentials:'same-origin',
+      body: JSON.stringify({ upvotes: newUpvotes })
+    };
+
+    fetch('/api/v1/movies/' + props.id, post)
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.statuse} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .then(response => {
+      console.log("response:", response)
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.statuse} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      props.setMovies(...props.movies, body)
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
+
+    location.reload()
+  }
+
+  const incrementDownVotes = () => {
+    let newDownvotes = parseInt(props.downvotes) + 1
+
+    const post = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method:'PATCH',
+      credentials:'same-origin',
+      body: JSON.stringify({ downvotes: newDownvotes })
+    };
+
+    fetch('/api/v1/movies/' + props.id, post)
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.statuse} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .then(response => {
+      console.log("response:", response)
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.statuse} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      props.setMovies(...props.movies, body)
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
+
+    location.reload()
   }
 
   const reveal = () => {
-    // TODO: make this reveal the description
-    console.log(props.name, "clicked")
+    if (visibility) {
+      setVisibility(false)
+    } else {
+      setVisibility(true)
+    }
   }
 
   return(
@@ -22,7 +118,7 @@ export const MovieTile = (props) => {
         {props.upvotes}
       </div>
       <div className='small-1 cursor-pointer'
-           onClick={increment}
+           onClick={incrementUpVotes}
       >
         [x]
       </div>
@@ -32,19 +128,17 @@ export const MovieTile = (props) => {
         {props.downvotes}
       </div>
       <div className='small-1 cursor-pointer'
-           onClick={increment}
+           onClick={incrementDownVotes}
       >
         [x]
       </div>
       <div className='small-2'>
       </div>
       <div className='small-12'>
-        <p><b>Release Year:</b> {props.year}</p>
-        <p><b>Director:</b> {props.director}</p>
-        <p><b>Description:</b> {props.desc}</p>
+        {details}
       </div>
     </ul>
   )
-}
 
+}
 export default MovieTile
