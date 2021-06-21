@@ -5,6 +5,40 @@ export const MovieTile = (props) => {
 
   let details = ""
 
+  let id
+  if !(props.id) {
+    id = -1
+  } else {
+    id = props.id
+  }
+
+  let fetchData = (post, movieID) => {
+    fetch('/api/v1/movies/' + movieID, post)
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.statuse} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.statuse} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      props.setMovies(...props.movies, body)
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+
   if (visibility) {
     details =
       <div>
@@ -26,36 +60,10 @@ export const MovieTile = (props) => {
       },
       method:'PATCH',
       credentials:'same-origin',
-      body: JSON.stringify({ upvotes: newUpvotes })
+      body: JSON.stringify({ title: props.title, description: props.desc, upvotes: newUpvotes })
     };
 
-    fetch('/api/v1/movies/' + props.id, post)
-    .then(response => {
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.statuse} (${response.statusText})`,
-        error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => {
-      console.log("response:", response)
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.statuse} (${response.statusText})`,
-        error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      props.setMovies(...props.movies, body)
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
-
-    location.reload()
+    fetchData(post, id)
   }
 
   const incrementDownVotes = () => {
@@ -71,33 +79,7 @@ export const MovieTile = (props) => {
       body: JSON.stringify({ downvotes: newDownvotes })
     };
 
-    fetch('/api/v1/movies/' + props.id, post)
-    .then(response => {
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.statuse} (${response.statusText})`,
-        error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => {
-      console.log("response:", response)
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.statuse} (${response.statusText})`,
-        error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      props.setMovies(...props.movies, body)
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
-
-    location.reload()
+    fetchData(post, id)
   }
 
   const reveal = () => {
@@ -112,7 +94,7 @@ export const MovieTile = (props) => {
     <ul className='grid-x small-12'>
       <h3 className='small-4 cursor-pointer'
            onClick={reveal}>
-        {props.name}
+        {props.title}
       </h3>
       <div className='small-1'>
         {props.upvotes}

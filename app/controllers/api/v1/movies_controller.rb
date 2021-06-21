@@ -8,12 +8,18 @@ class  Api::V1::MoviesController < ApplicationController
   end
 
   def update
-    updated_movie = Movie.find(params[:id])
+    # if movie is in database, update upvotes/downvotes
+    if params[:id] != -1
+      updated_movie = Movie.where(name: params[:format])
 
-    if updated_movie.update(movie_params)
-      render json: updated_movie
+      if updated_movie.update(movie_params)
+        render json: updated_movie
+      else
+        render json: { errors: updated_movie.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
     else
-      render json: { errors: updated_movie.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      # if movie isn't in database, add movie to database
+
     end
   end
 
