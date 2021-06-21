@@ -6,13 +6,16 @@ export const App = (props) => {
   const [movies, setMovies] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
 
+  function toTitles(s){ return s.replace(/\w\S*/g, function(t) { return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase(); }); }
+
   // search button's function
   const searchClick = () => {
-    console.log("click")
+    //convert input to pascal case
+    let pascalSearch = toTitles(searchTerm)
 
-    // fetch movie data from backend
-    useEffect(() => {
-      fetch('/api/v1/movies/' + searchTerm,
+    if (pascalSearch.trim() !== '' && pascalSearch[0].match(/^[0-9A-Z]+$/)) {
+      // fetch movie data from backend
+      fetch('/api/v1/movies.' + pascalSearch,
         {credentials:'same-origin'})
       .then(response => {
         if (response.ok) {
@@ -28,11 +31,13 @@ export const App = (props) => {
         setMovies(body)
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
-    },[])
+
+    } else {
+      setSearchTerm('')
+    }
   }
 
   let handleSearchChange = event => {
-    console.log(event.currentTarget.value)
     setSearchTerm(event.currentTarget.value)
   }
 
@@ -45,6 +50,7 @@ export const App = (props) => {
         <input
           type='text'
           placeholder='Search...'
+          value={searchTerm}
           className='small-10'
           onChange={handleSearchChange}/>
         <div

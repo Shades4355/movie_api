@@ -2,7 +2,7 @@ class  Api::V1::MoviesController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-    movies = Movie.all
+    movies = Movie.where(name: params[:format],)
 
     render json: movies
   end
