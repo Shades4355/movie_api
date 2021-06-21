@@ -73,7 +73,7 @@ export const App = (props) => {
   // display if fetch request finished
   if (movies) {
     //sort 'movies' by name, then map over sorted 'movies'
-    let movieTile = movies.sort((a,b) => (a.name > b.name) ? 1 : -1).map((movie, index) => {
+    let movieTile = movies.sort((a,b) => (a.name > b.name) ? 1 : -1).map(movie, index => {
       return(
         <MovieTile
           key={index}
