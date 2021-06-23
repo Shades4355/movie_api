@@ -34,9 +34,11 @@ export const MovieTile = (props) => {
     })
     .then(response => response.json())
     .then(body => {
-      props.setMovies(...props.movies, body)
+      props.setMovies(body)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
+
+
   }
 
   if (visibility) {
@@ -51,7 +53,7 @@ export const MovieTile = (props) => {
   }
 
   const incrementUpVotes = () => {
-    let newUpvotes = parseInt(props.upvotes) + 1
+    let newUpvotes = props.upvotes + 1
 
     const post = {
       headers: {
@@ -60,14 +62,14 @@ export const MovieTile = (props) => {
       },
       method:'PATCH',
       credentials:'same-origin',
-      body: JSON.stringify({ title: props.title, description: props.desc, upvotes: newUpvotes })
-    };
+      body: JSON.stringify({ title: props.title, description: props.desc, director: props.director, year: props.year, upvotes: newUpvotes })
+    }
 
     fetchData(post, id)
   }
 
   const incrementDownVotes = () => {
-    let newDownvotes = parseInt(props.downvotes) + 1
+    let newDownvotes = props.downvotes + 1
 
     const post = {
       headers: {
@@ -76,8 +78,8 @@ export const MovieTile = (props) => {
       },
       method:'PATCH',
       credentials:'same-origin',
-      body: JSON.stringify({ downvotes: newDownvotes })
-    };
+      body: JSON.stringify({ title: props.title, description: props.desc, director: props.director, year: props.year, downvotes: newDownvotes })
+    }
 
     fetchData(post, id)
   }
