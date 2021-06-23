@@ -99,7 +99,7 @@ export const App = (props) => {
         </div>
       </div>
     )
-  } else { // display if fetch request fails
+  } else { //display before fetch request or if fetcch fails
     return (
       <div>
         {page}
