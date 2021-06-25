@@ -4,12 +4,12 @@ class  Api::V1::MoviesController < ApplicationController
   def index
     saved_movies = Movie.where("display_title like ?", "%#{params[:format]}%")
 
-    movies_array = []
-    saved_movies.each do |movie|
-      movies_array.push(movie)
+    if saved_movies
+      movies_array = []
+      saved_movies.each do |movie|
+        movies_array.push(movie)
+      end
     end
-
-    binding.pry # TODO: remove 
 
     searchTerm = params[:format]
 
