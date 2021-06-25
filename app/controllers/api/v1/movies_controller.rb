@@ -21,14 +21,23 @@ class  Api::V1::MoviesController < ApplicationController
       parsed_movies.push(movie)
     end
 
-    if movies_array
-      parsed_movies.each do |movie|
-        binding.pry # TODO: remove
-        if not movies_array.include?(movie)
-          movies_array.push(movie)
+    def compare_lists(primary_movie, secondary_list)
+      secondary_list.each do |movie|
+        if primary_movie["display_title"] == movie["display_title"]
+          return movie
         end
       end
-      render json: movies_array
+      return primary_movie
+    end
+
+    return_array = []
+
+    if movies_array
+      # checks each movie, if movies_array and parsed_movies contain the same movie, displays the movies_array version
+      parsed_movies.each do |movie|
+        return_array.push(compare_lists(movie, movies_array))
+      end
+      render json: return_array
     else
       render json: parsed_movies
     end
