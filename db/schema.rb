@@ -16,10 +16,9 @@ ActiveRecord::Schema.define(version: 2021_06_08_220035) do
   enable_extension "plpgsql"
 
   create_table "movies", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description", null: false
-    t.string "director", null: false
-    t.integer "release_year", null: false
+    t.string "display_title", null: false
+    t.string "headline", null: false
+    t.integer "publication_date", null: false
     t.integer "upvotes", null: false
     t.integer "downvotes", null: false
   end

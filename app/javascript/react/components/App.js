@@ -78,14 +78,11 @@ export const App = (props) => {
         <MovieTile
           key={index}
           id={movie.id}
-          title={movie.title}
-          year={movie.release_year}
-          director={movie.director}
-          desc={movie.description}
+          title={movie.display_title}
+          year={movie.publication_date}
+          desc={movie.headline}
           upvotes={movie.upvotes}
           downvotes={movie.downvotes}
-          movies={movies}
-          setMovies={setMovies}
         />
       )
     })
