@@ -2,9 +2,35 @@ class  Api::V1::MoviesController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-    movies = Movie.where("title like ?", "%#{params[:format]}%")
+    saved_movies = Movie.where("display_title like ?", "%#{params[:format]}%")
 
-    render json: movies
+    movies_array = []
+    saved_movies.each do |movie|
+      movies_array.push(movie)
+    end
+
+    binding.pry # TODO: remove 
+
+    searchTerm = params[:format]
+
+    fetched_movies = HTTParty.get('https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=' + searchTerm + '&api-key=' + ENV["MOVIE_KEY"]).parsed_response["results"]
+
+    parsed_movies = []
+
+    fetched_movies.each do |movie|
+      parsed_movies.push(movie)
+    end
+
+    if movies_array
+      parsed_movies.each do |movie|
+        if not movies_array.include?(movie)
+          movies_array.push(movie)
+        end
+      end
+      render json: movies_array
+    else
+      render json: parsed_movies
+    end
   end
 
   def show

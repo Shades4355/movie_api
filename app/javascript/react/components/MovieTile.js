@@ -44,9 +44,8 @@ export const MovieTile = (props) => {
   if (visibility) {
     details =
       <div>
-        <p><b>Release Year:</b> {props.year}</p>
-        <p><b>Director:</b> {props.director}</p>
-        <p><b>Description:</b> {props.desc}</p>
+        <p><b>Publication Date:</b> {props.year}</p>
+        <p><b>Headline:</b> {props.desc}</p>
       </div>
   } else {
     details =  ""
@@ -62,7 +61,7 @@ export const MovieTile = (props) => {
       },
       method:'PATCH',
       credentials:'same-origin',
-      body: JSON.stringify({ title: props.title, description: props.desc, director: props.director, year: props.year, upvotes: newUpvotes })
+      body: JSON.stringify({ title: props.display_title, headline: props.desc, publication_date: props.year, upvotes: newUpvotes })
     }
 
     fetchData(post, id)
@@ -78,7 +77,7 @@ export const MovieTile = (props) => {
       },
       method:'PATCH',
       credentials:'same-origin',
-      body: JSON.stringify({ title: props.title, description: props.desc, director: props.director, year: props.year, downvotes: newDownvotes })
+      body: JSON.stringify({ title: props.display_title, headline: props.desc, publication_date: props.year, downvotes: newDownvotes })
     }
 
     fetchData(post, id)
@@ -93,7 +92,7 @@ export const MovieTile = (props) => {
   }
 
   return(
-    <ul className='grid-x small-12'>
+    <div className='grid-x small-12'>
       <h3 className='small-4 cursor-pointer'
            onClick={reveal}>
         {props.title}
@@ -121,7 +120,7 @@ export const MovieTile = (props) => {
       <div className='small-12'>
         {details}
       </div>
-    </ul>
+    </div>
   )
 
 }
