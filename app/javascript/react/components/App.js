@@ -6,11 +6,13 @@ export const App = (props) => {
   const [movies, setMovies] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
 
-  function toTitles(s){ return s.replace(/\w\S*/g, function(t) { return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase(); }); }
+  function toTitles(s){
+    // converts text into Pascal Case
+    return s.replace(/\w\S*/g, function(t) { return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase(); });
+  }
 
   // search button's function
   const searchClick = () => {
-    //convert input to pascal case
     let pascalSearch = toTitles(searchTerm)
 
     if (pascalSearch.trim() !== '' && pascalSearch[0].match(/^[0-9A-Z]+$/)) {

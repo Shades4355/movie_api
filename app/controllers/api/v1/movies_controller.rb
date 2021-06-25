@@ -33,6 +33,7 @@ class  Api::V1::MoviesController < ApplicationController
     return_array = []
 
     if movies_array
+      # checks each movie, if movies_array and parsed_movies contain the same movie, displays the movies_array version
       parsed_movies.each do |movie|
         return_array.push(compare_lists(movie, movies_array))
       end
