@@ -23,6 +23,7 @@ class  Api::V1::MoviesController < ApplicationController
 
     if movies_array
       parsed_movies.each do |movie|
+        binding.pry # TODO: remove
         if not movies_array.include?(movie)
           movies_array.push(movie)
         end
@@ -39,17 +40,22 @@ class  Api::V1::MoviesController < ApplicationController
 
   def update
     # if movie is in database, update upvotes/downvotes
-    if params[:id] != -1
-        updated_movie = Movie.find(params[:id])
+    updated_movie = Movie.find(params[:id])
 
-      if updated_movie.update(movie_update_params)
-        render json: [updated_movie,]
-      else
-            render json: { errors: updated_movie.errors.full_messages.to_sentence }, status: :unprocessable_entity
-      end
+    if updated_movie.update(movie_update_params)
+      render json: [updated_movie,]
     else
-      # if movie isn't in database, add movie to database
+          render json: { errors: updated_movie.errors.full_messages.to_sentence }, status: :unprocessable_entity
+    end
+  end
 
+  def create
+    new_saved_movie = Movie.new(movie_create_params)
+
+    if new_saved_movie.save
+      render json: new_saved_movie
+    else
+      render json: { errors: new_saved_movie.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end
   end
 
@@ -60,6 +66,6 @@ class  Api::V1::MoviesController < ApplicationController
   end
 
   def movie_create_params
-    params.require(:movie).permit(:title, :description, :year, :director, :upvotes, :downvotes)
+    params.require(:movie).permit(:display_title, :headline, :publication_date, :upvotes, :downvotes)
   end
 end

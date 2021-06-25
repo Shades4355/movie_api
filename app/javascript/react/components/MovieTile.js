@@ -4,41 +4,79 @@ export const MovieTile = (props) => {
   const [visibility, setVisibility] = useState(false)
 
   let details = ""
-
   let id
-  if (!props.id) {
-    id = -1
-  } else {
+  let upvotes
+  let downvotes
+
+  let fetchPostData = (post) => {
+      fetch('/api/v1/movies/', post)
+      .then(response => {
+        if (response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.statuse} (${response.statusText})`,
+          error = new Error(errorMessage)
+          throw error
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.statuse} (${response.statusText})`,
+          error = new Error(errorMessage)
+          throw error
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        props.setMovies(body)
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
+    }
+  let fetchPatchData = (patch, movieID) => {
+      fetch('/api/v1/movies/' + movieID, patch)
+      .then(response => {
+        if (response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.statuse} (${response.statusText})`,
+          error = new Error(errorMessage)
+          throw error
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.statuse} (${response.statusText})`,
+          error = new Error(errorMessage)
+          throw error
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        props.setMovies(body)
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
+    }
+
+  if (props.id) {
     id = props.id
+  } else {
+    id = -1
   }
 
-  let fetchData = (post, movieID) => {
-    fetch('/api/v1/movies/' + movieID, post)
-    .then(response => {
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.statuse} (${response.statusText})`,
-        error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        return response
-      } else {
-        let errorMessage = `${response.statuse} (${response.statusText})`,
-        error = new Error(errorMessage)
-        throw error
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      props.setMovies(body)
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`))
+  if (props.upvotes) {
+    upvotes = props.upvotes
+  } else {
+    upvotes = 0
+  }
 
-
+  if (props.downvotes) {
+    downvotes = props.downvotes
+  } else {
+    downvotes = 0
   }
 
   if (visibility) {
@@ -52,35 +90,63 @@ export const MovieTile = (props) => {
   }
 
   const incrementUpVotes = () => {
-    let newUpvotes = props.upvotes + 1
+    let newUpvotes = upvotes + 1
 
-    const post = {
+    const patch = {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       method:'PATCH',
       credentials:'same-origin',
-      body: JSON.stringify({ title: props.display_title, headline: props.desc, publication_date: props.year, upvotes: newUpvotes })
+      body: JSON.stringify({ display_title: props.title, headline: props.desc, publication_date: props.year, upvotes: newUpvotes, downvotes: downvotes })
     }
 
-    fetchData(post, id)
+    const post = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method:'POST',
+      credentials:'same-origin',
+      body: JSON.stringify({ display_title: props.title, headline: props.desc, publication_date: props.year, upvotes: newUpvotes, downvotes: downvotes })
+    }
+
+    if (id === -1) {
+      fetchPostData(post)
+    } else {
+      fetchPatchData(patch, id)
+    }
   }
 
   const incrementDownVotes = () => {
-    let newDownvotes = props.downvotes + 1
+    let newDownvotes = downvotes + 1
 
-    const post = {
+    const patch = {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       method:'PATCH',
       credentials:'same-origin',
-      body: JSON.stringify({ title: props.display_title, headline: props.desc, publication_date: props.year, downvotes: newDownvotes })
+      body: JSON.stringify({ display_title: props.title, headline: props.desc, publication_date: props.year, downvotes: newDownvotes, upvotes: upvotes })
     }
 
-    fetchData(post, id)
+    const post = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method:'POST',
+      credentials:'same-origin',
+      body: JSON.stringify({ display_title: props.title, headline: props.desc, publication_date: props.year, downvotes: newDownvotes, upvotes: upvotes })
+    }
+
+    if (id === -1) {
+      fetchPostData(post)
+    } else {
+      fetchPatchData(patch, id)
+    }
   }
 
   const reveal = () => {
