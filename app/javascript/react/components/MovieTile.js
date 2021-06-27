@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 export const MovieTile = (props) => {
   const [visibility, setVisibility] = useState(false)
@@ -164,7 +164,7 @@ export const MovieTile = (props) => {
         {props.title}
       </h3>
       <div className='small-1'>
-        {props.upvotes}
+        {upvotes}
       </div>
       <div className='small-1 cursor-pointer'
            onClick={incrementUpVotes}
@@ -174,7 +174,7 @@ export const MovieTile = (props) => {
       <div className='small-2'>
       </div>
       <div className='small-1'>
-        {props.downvotes}
+        {downvotes}
       </div>
       <div className='small-1 cursor-pointer'
            onClick={incrementDownVotes}

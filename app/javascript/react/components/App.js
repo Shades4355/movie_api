@@ -85,6 +85,7 @@ export const App = (props) => {
           desc={movie.headline}
           upvotes={movie.upvotes}
           downvotes={movie.downvotes}
+          setMovies={setMovies}
         />
       )
     })
