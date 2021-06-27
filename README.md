@@ -23,3 +23,5 @@ Technical:
 ![search: Aliens](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-06-26%20at%208.11.10%20PM.png)
 
 ![thumbs up Alien x2](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-06-26%20at%208.11.38%20PM.png)
+
+![Aliens details    ](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-06-27%20at%2011.28.07%20AM.png)
