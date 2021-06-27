@@ -81,7 +81,7 @@ export const App = (props) => {
           key={index}
           id={movie.id}
           title={movie.display_title}
-          year={movie.publication_date}
+          year={movie.opening_date}
           desc={movie.headline}
           upvotes={movie.upvotes}
           downvotes={movie.downvotes}
