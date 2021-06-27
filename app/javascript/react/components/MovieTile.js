@@ -82,7 +82,7 @@ export const MovieTile = (props) => {
   if (visibility) {
     details =
       <div>
-        <p><b>Publication Date:</b> {props.year}</p>
+        <p><b>Opening Date:</b> {props.year}</p>
         <p><b>Headline:</b> {props.desc}</p>
       </div>
   } else {
