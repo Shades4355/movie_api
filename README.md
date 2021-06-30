@@ -15,6 +15,10 @@ Technical:
 
 * Database: PostgreSQL
 
+* To run Rspec tests: `bundle exec rspec`
+
+* To run Jest tests: `yarn jest`
+
 
 ![logged out](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-06-26%20at%208.10.30%20PM.png)
 
