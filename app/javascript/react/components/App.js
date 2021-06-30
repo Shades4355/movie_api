@@ -64,7 +64,7 @@ export const App = (props) => {
         Movie Title
         </div>
         <div className='small-4 bold'>
-        Thumps Up
+        Thumbs Up
         </div>
         <div className='small-4 bold'>
         Thumbs Down
