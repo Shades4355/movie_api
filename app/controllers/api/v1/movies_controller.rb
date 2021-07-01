@@ -75,6 +75,6 @@ class  Api::V1::MoviesController < ApplicationController
   end
 
   def movie_create_params
-    params.require(:movie).permit(:display_title, :headline, :publication_date, :upvotes, :downvotes)
+    params.require(:movie).permit(:display_title, :headline, :opening_date, :upvotes, :downvotes)
   end
 end
