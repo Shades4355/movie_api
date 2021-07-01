@@ -114,6 +114,7 @@ export const MovieTile = (props) => {
 
     if (id === -1) {
       fetchPostData(post)
+      window.location.reload()
     } else {
       fetchPatchData(patch, id)
     }
@@ -144,6 +145,7 @@ export const MovieTile = (props) => {
 
     if (id === -1) {
       fetchPostData(post)
+      window.location.reload()
     } else {
       fetchPatchData(patch, id)
     }
