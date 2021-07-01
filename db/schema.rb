@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_06_08_220035) do
   create_table "movies", force: :cascade do |t|
     t.string "display_title", null: false
     t.string "headline", null: false
-    t.integer "publication_date", null: false
+    t.integer "opening_date", null: false
     t.integer "upvotes", null: false
     t.integer "downvotes", null: false
   end

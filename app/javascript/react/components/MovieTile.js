@@ -99,7 +99,7 @@ export const MovieTile = (props) => {
       },
       method:'PATCH',
       credentials:'same-origin',
-      body: JSON.stringify({ display_title: props.title, headline: props.desc, publication_date: props.year, upvotes: newUpvotes, downvotes: downvotes })
+      body: JSON.stringify({ display_title: props.title, headline: props.desc, opening_date: props.year, upvotes: newUpvotes, downvotes: downvotes })
     }
 
     const post = {
@@ -109,7 +109,7 @@ export const MovieTile = (props) => {
       },
       method:'POST',
       credentials:'same-origin',
-      body: JSON.stringify({ display_title: props.title, headline: props.desc, publication_date: props.year, upvotes: newUpvotes, downvotes: downvotes })
+      body: JSON.stringify({ display_title: props.title, headline: props.desc, opening_date: props.year, upvotes: newUpvotes, downvotes: downvotes })
     }
 
     if (id === -1) {
@@ -129,7 +129,7 @@ export const MovieTile = (props) => {
       },
       method:'PATCH',
       credentials:'same-origin',
-      body: JSON.stringify({ display_title: props.title, headline: props.desc, publication_date: props.year, downvotes: newDownvotes, upvotes: upvotes })
+      body: JSON.stringify({ display_title: props.title, headline: props.desc, opening_date: props.year, downvotes: newDownvotes, upvotes: upvotes })
     }
 
     const post = {
@@ -139,7 +139,7 @@ export const MovieTile = (props) => {
       },
       method:'POST',
       credentials:'same-origin',
-      body: JSON.stringify({ display_title: props.title, headline: props.desc, publication_date: props.year, downvotes: newDownvotes, upvotes: upvotes })
+      body: JSON.stringify({ display_title: props.title, headline: props.desc, opening_date: props.year, downvotes: newDownvotes, upvotes: upvotes })
     }
 
     if (id === -1) {
