@@ -20,12 +20,12 @@ Technical:
 * To run Jest tests: `yarn jest`
 
 
-![logged out](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-06-26%20at%208.10.30%20PM.png)
+![home page - logged out](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-07-01%20at%2012.34.46%20PM.png)
 
-![logged in](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-06-26%20at%208.10.55%20PM.png)
+![home page - logged in](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-07-01%20at%2012.35.06%20PM.png)
 
-![search: Aliens](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-06-26%20at%208.11.10%20PM.png)
+![search: Aliens](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-07-01%20at%2012.35.19%20PM.png)
 
-![thumbs up Alien x2](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-06-26%20at%208.11.38%20PM.png)
+![thumbs up Alien](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-07-01%20at%2012.35.42%20PM.png)
 
-![Aliens details](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-06-27%20at%2011.28.07%20AM.png)
+![Aliens details](https://github.com/Shades4355/movie_api/blob/main/screenshots/Screen%20Shot%202021-07-01%20at%2012.43.28%20PM.png)
